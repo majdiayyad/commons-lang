@@ -2299,6 +2299,15 @@ public class StringUtils {
         }
 
         final int[] p = new int[n + 1];
+
+        // Ensure n is within the bounds before accessing p[n]
+        if (n < p.length) {
+            return p[n];  // Safe access to p[n]
+      }
+        else {
+    throw new ArrayIndexOutOfBoundsException("Index " + n + " is out of bounds for array of length " + p.length);
+     }
+
         // indexes into strings s and t
         int i; // iterates through s
         int j; // iterates through t
