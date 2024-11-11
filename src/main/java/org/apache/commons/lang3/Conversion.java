@@ -1,4 +1,4 @@
-/*
+src/main/java/org/apache/commons/lang3/Conversion.java/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -171,6 +171,11 @@ public class Conversion {
         }
         byte out = dstInit;
         for (int i = 0; i < nBools; i++) {
+    // Ensure i + srcPos does not exceed src.length - 1
+             if (i + srcPos >= src.length) {
+                 break; // Exit the loop if we're beyond the src array bounds
+    }
+    
             final int shift = i + dstPos;
             final int bits = (src[i + srcPos] ? 1 : 0) << shift;
             final int mask = 0x1 << shift;
