@@ -1,4 +1,4 @@
-/*
+	/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -88,8 +88,10 @@ public abstract class AbstractConcurrentInitializerCloseAndExceptionsTest extend
         final ConcurrentInitializer<CloseableObject> initializer = createInitializerThatThrowsException(
                 CloseableObject::new,
                 CloseableObject -> methodThatThrowsException(ExceptionToThrow.IOException));
+
+        initializer.get(); // Calls outside of the try/catch
+
         try {
-            initializer.get();
             ((AbstractConcurrentInitializer) initializer).close();
             fail();
         } catch (final Exception e) {
