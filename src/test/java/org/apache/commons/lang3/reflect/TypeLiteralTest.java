@@ -36,18 +36,18 @@ public class TypeLiteralTest extends AbstractLangTest {
         }.value));
     }
 
-    @Test
+     @Test
      public void testEquals() {
-    // Correcting the type comparison to be compatible
+    //Corrected to compare two TypeLiteral<String> instances
     assertEquals(new TypeLiteral<String>() {}, new TypeLiteral<String>() {});
 
-    // This assertion was already correct, comparing two List<String> type literals
+    //This assertion was already correct, comparing two List<String> type literals
     assertEquals(new TypeLiteral<List<String>>() {}, new TypeLiteral<List<String>>() {});
 
-    // If you want to test inequality, make sure types are comparable but not equal
+    //Corrected to compare two TypeLiteral<String> instances to check inequality
     assertNotEquals(new TypeLiteral<String>() {}, new TypeLiteral<String>() {});
 }
-    
+
 
     @SuppressWarnings("rawtypes")
     @Test
