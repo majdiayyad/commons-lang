@@ -36,11 +36,18 @@ public class TypeLiteralTest extends AbstractLangTest {
         }.value));
     }
 
-         @Test
-    public void testEquals() {
-        assertEquals(new TypeLiteral<String>() {}, new TypeLiteral<String>() {});
-        assertEquals(new TypeLiteral<List<String>>() {}, new TypeLiteral<List<String>>() {});
-        assertNotEquals(new TypeLiteral<String>() {}, new TypeLiteral<String>() {});
+        @Test
+        public void testEquals() {
+        public void testEquals() {
+        assertEquals(new TypeLiteral<String>() {
+        }, new TypeLiteral<String>() {
+        });
+        assertEquals(new TypeLiteral<List<String>>() {
+        }, new TypeLiteral<List<String>>() {
+        });
+        assertNotEquals(new TypeLiteral<String>() {
+        }, new TypeLiteral<List<String>>() {
+        });
     }
 
 
