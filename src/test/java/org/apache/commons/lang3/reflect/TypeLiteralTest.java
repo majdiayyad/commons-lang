@@ -40,7 +40,7 @@ public class TypeLiteralTest extends AbstractLangTest {
     public void testEquals() {
         assertEquals(new TypeLiteral<String>() {}, new TypeLiteral<String>() {});
         assertEquals(new TypeLiteral<List<String>>() {}, new TypeLiteral<List<String>>() {});
-        assertNotEquals(new TypeLiteral<String>() {}, new TypeLiteral<List<String>>() {});
+        assertNotEquals(new TypeLiteral<String>() {}, new TypeLiteral<Integer>() {});
     }
 
 

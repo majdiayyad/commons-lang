@@ -30,3 +30,6 @@ jobs:
       - name: 'Dependency Review PR'
         uses: actions/dependency-review-action@4081bf99e2866ebe428fc0477b69eb4fcda7220a # v4.4.0
 
+        with:
+          base-ref: ${{ github.event.before }}
+          head-ref: ${{ github.sha }} 
