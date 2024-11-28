@@ -410,59 +410,71 @@ public class StopWatchTest extends AbstractLangTest {
 
     @Test
     public void testSuspend() throws InterruptedException {
-        // Watch out comparing measurements from System.currentTimeMillis() vs. System.nanoTime()
-        final StopWatch watch = StopWatch.createStarted();
-        final long testStartMillis = System.currentTimeMillis();
-        final long testStartNanos = System.nanoTime();
-        final Instant testStartInstant = Instant.ofEpochMilli(testStartMillis);
-        final Duration sleepDuration = MIN_DURATION;
-        final long sleepMillis = sleepDuration.toMillis();
-        sleepPlus1(sleepDuration);
-        watch.suspend();
-        final long testSuspendMillis = System.currentTimeMillis();
-        final long testSuspendNanos = System.nanoTime();
-        final long testSuspendTimeNanos = testSuspendNanos - testStartNanos;
-        // See sleepPlus1
-        final Duration testSuspendDuration = Duration.ofNanos(testSuspendTimeNanos).plusMillis(1);
-        final long suspendTimeFromNanos = watch.getTime();
-        final Duration suspendDuration = watch.getDuration();
-        final long stopTimeMillis = watch.getStopTime();
-        final Instant stopInstant = watch.getStopInstant();
-
-        assertTrue(testStartMillis <= stopTimeMillis, () -> String.format("testStartMillis %s <= stopTimeMillis %s", testStartMillis, stopTimeMillis));
-        assertTrue(testStartInstant.isBefore(stopInstant), () -> String.format("testStartInstant %s < stopInstant %s", testStartInstant, stopInstant));
-        assertTrue(testSuspendMillis <= stopTimeMillis, () -> String.format("testSuspendMillis %s <= stopTimeMillis %s", testSuspendMillis, stopTimeMillis));
-        assertTrue(testSuspendMillis <= stopInstant.toEpochMilli(),
-                () -> String.format("testSuspendMillis %s <= stopInstant %s", testSuspendMillis, stopInstant));
-
-        sleepPlus1(sleepDuration);
-        watch.resume();
-        sleepPlus1(sleepDuration);
-        watch.stop();
-        final long totalTimeFromNanos = watch.getTime();
-        final Duration totalDuration = watch.getDuration();
-
-        assertTrue(suspendTimeFromNanos >= sleepMillis, () -> String.format("suspendTimeFromNanos %s >= sleepMillis %s", suspendTimeFromNanos, sleepMillis));
-        assertTrue(suspendDuration.compareTo(Duration.ofMillis(sleepMillis)) >= 0,
-                () -> String.format("suspendDuration %s >= sleepMillis %s", suspendDuration, sleepMillis));
-        assertTrue(suspendTimeFromNanos <= testSuspendTimeNanos,
-                () -> String.format("suspendTimeFromNanos %s <= testSuspendTimeNanos %s", suspendTimeFromNanos, testSuspendTimeNanos));
-        assertTrue(suspendDuration.compareTo(testSuspendDuration) <= 0,
-                () -> String.format("suspendDuration %s <= testSuspendDuration %s", suspendDuration, testSuspendDuration));
-
-        final long sleepMillisX2 = sleepMillis + sleepMillis;
-        assertTrue(totalTimeFromNanos >= sleepMillisX2, () -> String.format("totalTimeFromNanos %s >= sleepMillisX2 %s", totalTimeFromNanos, sleepMillisX2));
-        assertTrue(totalDuration.compareTo(Duration.ofMillis(sleepMillisX2)) >= 0,
-                () -> String.format("totalDuration >= sleepMillisX2", totalDuration, sleepMillisX2));
-
-        // Be lenient for slow running builds
-        final long testTooLongMillis = sleepMillis * 100;
-        assertTrue(totalTimeFromNanos < testTooLongMillis,
-                () -> String.format("totalTimeFromNanos %s < testTooLongMillis %s", totalTimeFromNanos, testTooLongMillis));
-        assertTrue(totalDuration.compareTo(Duration.ofMillis(testTooLongMillis)) < 0,
-                () -> String.format("totalDuration %s < testTooLongMillis %s", totalDuration, testTooLongMillis));
-
-    }
+    // Watch out comparing measurements from System.currentTimeMillis() vs. System.nanoTime()
+    final StopWatch watch = StopWatch.createStarted();
+    final long testStartMillis = System.currentTimeMillis();
+    final long testStartNanos = System.nanoTime();
+    final Instant testStartInstant = Instant.ofEpochMilli(testStartMillis);
+    final Duration sleepDuration = MIN_DURATION;
+    final long sleepMillis = sleepDuration.toMillis();
+    sleepPlus1(sleepDuration);
+    watch.suspend();
+    final long testSuspendMillis = System.currentTimeMillis();
+    final long testSuspendNanos = System.nanoTime();
+    final long testSuspendTimeNanos = testSuspendNanos - testStartNanos;
+    // See sleepPlus1
+    final Duration testSuspendDuration = Duration.ofNanos(testSuspendTimeNanos).plusMillis(1);
+    final long suspendTimeFromNanos = watch.getTime();
+    final Duration suspendDuration = watch.getDuration();
+    final long stopTimeMillis = watch.getStopTime();
+    final Instant stopInstant = watch.getStopInstant();
+    
+    assertTrue(testStartMillis <= stopTimeMillis, 
+        () -> String.format("testStartMillis %s <= stopTimeMillis %s", testStartMillis, 
+stopTimeMillis));
+    assertTrue(testStartInstant.isBefore(stopInstant), 
+        () -> String.format("testStartInstant %s < stopInstant %s", testStartInstant, stopInstant));
+    assertTrue(testSuspendMillis <= stopTimeMillis, 
+        () -> String.format("testSuspendMillis %s <= stopTimeMillis %s", testSuspendMillis, 
+stopTimeMillis));
+    assertTrue(testSuspendMillis <= stopInstant.toEpochMilli(),
+        () -> String.format("testSuspendMillis %s <= stopInstant %s", testSuspendMillis, stopInstant));
+    
+    sleepPlus1(sleepDuration);
+    watch.resume();
+    sleepPlus1(sleepDuration);
+    watch.stop();
+    final long totalTimeFromNanos = watch.getTime();
+    final Duration totalDuration = watch.getDuration();
+    
+    assertTrue(suspendTimeFromNanos >= sleepMillis, 
+        () -> String.format("suspendTimeFromNanos %s >= sleepMillis %s", suspendTimeFromNanos, 
+sleepMillis));
+    assertTrue(suspendDuration.compareTo(Duration.ofMillis(sleepMillis)) >= 0,
+        () -> String.format("suspendDuration %s >= sleepMillis %s", suspendDuration, sleepMillis));
+    assertTrue(suspendTimeFromNanos <= testSuspendTimeNanos,
+        () -> String.format("suspendTimeFromNanos %s <= testSuspendTimeNanos %s", suspendTimeFromNanos, 
+testSuspendTimeNanos));
+    assertTrue(suspendDuration.compareTo(testSuspendDuration) <= 0,
+        () -> String.format("suspendDuration %s <= testSuspendDuration %s", suspendDuration, 
+testSuspendDuration));
+    
+    final long sleepMillisX2 = sleepMillis + sleepMillis;
+    assertTrue(totalTimeFromNanos >= sleepMillisX2, 
+        () -> String.format("totalTimeFromNanos %s >= sleepMillisX2 %s", totalTimeFromNanos, 
+sleepMillisX2));
+    assertTrue(totalDuration.compareTo(Duration.ofMillis(sleepMillisX2)) >= 0,
+        () -> String.format("totalDuration >= sleepMillisX2 %s", sleepMillisX2));
+    
+    // Be lenient for slow running builds
+    final long testTooLongMillis = sleepMillis * 100;   
+    assertTrue(totalTimeFromNanos < testTooLongMillis, 
+        () -> String.format("totalTimeFromNanos %s < testTooLongMillis %s", totalTimeFromNanos, 
+testTooLongMillis));
+    assertTrue(totalDuration.compareTo(Duration.ofMillis(testTooLongMillis)) < 0,
+        () -> String.format("totalDuration %s < testTooLongMillis %s", totalDuration, 
+testTooLongMillis));
+}
 
     @Test
     public void testToSplitString() throws InterruptedException {

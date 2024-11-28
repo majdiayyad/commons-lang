@@ -2279,63 +2279,64 @@ public class StringUtils {
             throw new IllegalArgumentException("Strings must not be null");
         }
 
-        int n = s.length();
-        int m = t.length();
+    int n = s.length();
+int m = t.length();
 
-        if (n == 0) {
-            return m;
-        }
-        if (m == 0) {
-            return n;
-        }
+// Handle edge cases where one of the strings is empty
+if (n == 0) {
+    return m; // If s is empty, the distance is the length of t
+}
+if (m == 0) {
+    return n; // If t is empty, the distance is the length of s
+}
 
-        if (n > m) {
-            // swap the input strings to consume less memory
-            final CharSequence tmp = s;
-            s = t;
-            t = tmp;
-            n = m;
-            m = t.length();
-        }
+// Swap the input strings if needed to consume less memory
+if (n > m) {
+    final CharSequence tmp = s;
+    s = t;
+    t = tmp;
+    n = m;
+    m = t.length();
+}
 
-        final int[] p = new int[n + 1];
+// Initialize the distance array
+final int[] p = new int[n + 1];
 
-        // Ensure n is within the bounds before accessing p[n]
-        if (n < p.length) {
-            return p[n];  // Safe access to p[n]
-      }
-        else {
-    throw new ArrayIndexOutOfBoundsException("Index " + n + " is out of bounds for array of length " + p.length);
-     }
+// Populate the array for the first row (distance from empty string)
+for (int i = 0; i <= n; i++) {
+    p[i] = i;
+}
 
-        // indexes into strings s and t
-        int i; // iterates through s
-        int j; // iterates through t
-        int upperleft;
-        int upper;
+// Declare variables
+int upperleft; // Value from the upper-left diagonal
+int upper;     // Value from the cell directly above
+char jOfT;     // jth character of string t
+int cost;      // Cost for a substitution
 
-        char jOfT; // jth character of t
-        int cost;
+// Iterate over columns (characters of t)
+for (int j = 1; j <= m; j++) {
+    upperleft = p[0]; // Save the top-left diagonal value
+    jOfT = t.charAt(j - 1); // Current character from t
+    p[0] = j; // Update the first cell for the current row
 
-        for (i = 0; i <= n; i++) {
-            p[i] = i;
-        }
+    // Iterate over rows (characters of s)
+    for (int i = 1; i <= n; i++) {
+        upper = p[i]; // Save the value above the current cell
+        cost = s.charAt(i - 1) == jOfT ? 0 : 1; // Cost is 0 if characters match, else 1
 
-        for (j = 1; j <= m; j++) {
-            upperleft = p[0];
-            jOfT = t.charAt(j - 1);
-            p[0] = j;
+        // Update the current cell with the minimum cost
+        p[i] = Math.min(
+            Math.min(p[i - 1] + 1, p[i] + 1), // Minimum of left and top
+            upperleft + cost // Diagonal + substitution cost
+        );
 
-            for (i = 1; i <= n; i++) {
-                upper = p[i];
-                cost = s.charAt(i - 1) == jOfT ? 0 : 1;
-                // minimum of cell to the left+1, to the top+1, diagonally left and up +cost
-                p[i] = Math.min(Math.min(p[i - 1] + 1, p[i] + 1), upperleft + cost);
-                upperleft = upper;
-            }
-        }
+        upperleft = upper; // Update upperleft for the next iteration
+    }
+}
 
-        return p[n];
+// Return the bottom-right value, which is the Levenshtein distance
+return p[n];
+
     }
 
     /**

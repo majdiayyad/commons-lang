@@ -1,4 +1,4 @@
-src/main/java/org/apache/commons/lang3/Conversion.java/*
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -14,9 +14,11 @@ src/main/java/org/apache/commons/lang3/Conversion.java/*
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.lang3;
 
+package org.apache.commons.lang3;
+ 
 import java.util.UUID;
+
 
 /**
  * Static methods to convert a type into another, with endianness and bit ordering awareness.

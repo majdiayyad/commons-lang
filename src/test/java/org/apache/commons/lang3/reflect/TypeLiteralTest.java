@@ -38,7 +38,6 @@ public class TypeLiteralTest extends AbstractLangTest {
 
         @Test
         public void testEquals() {
-        public void testEquals() {
         assertEquals(new TypeLiteral<String>() {
         }, new TypeLiteral<String>() {
         });

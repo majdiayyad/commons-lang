@@ -1448,9 +1448,8 @@ public class FailableFunctionsTest extends AbstractLangTest {
         assertInstanceOf(SomeException.class, cause);
         assertEquals("Odd Invocation: 1", cause.getMessage());
         final boolean instance = predicate.test(null);
-        assertTrue(instance);     //or assertFalse(instance);
+        assertTrue(instance);  
  
-        //assertNotNull(instance);
     }
 
     @Test
