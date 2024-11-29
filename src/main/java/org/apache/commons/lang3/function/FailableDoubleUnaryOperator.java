@@ -49,7 +49,7 @@ public interface FailableDoubleUnaryOperator<E extends Throwable> {
      * @return The NOP singleton.
      */
     @SuppressWarnings("unchecked")
-    static <E extends Throwable> FailableDoubleUnaryOperator<E> nop() {
+    static <E extends Throwable> FailableDoubleUnaryOperator<E> no0p() {
         return NOP;
     }
 

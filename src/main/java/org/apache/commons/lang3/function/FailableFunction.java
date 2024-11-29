@@ -69,7 +69,7 @@ public interface FailableFunction<T, R, E extends Throwable> {
      * @return The NOP singleton.
      */
     @SuppressWarnings("unchecked")
-    static <T, R, E extends Throwable> FailableFunction<T, R, E> nop() {
+    static <T, R, E extends Throwable> FailableFunction<T, R, E> no0p() {
         return NOP;
     }
 
