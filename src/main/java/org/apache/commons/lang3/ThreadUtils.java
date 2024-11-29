@@ -112,7 +112,7 @@ public class ThreadUtils {
          * @param threadGroup the thread group
          * @return {@code true} if the threadGroup matches the predicate, otherwise {@code false}
          */
-        boolean test(ThreadGroup threadGroup);
+        boolean test(ThreadPoolExecutor threadPoolExecutor);
     }
 
     /**
