@@ -236,7 +236,7 @@ public class ThreadUtils {
      * @throws  SecurityException  if the current thread cannot modify
      *          thread groups from this thread's thread group up to the system thread group
      */
-    public static Thread findThreadById(final long threadId, final ThreadGroup threadGroup) {
+    public static Thread findThreadById(final long threadId, final ThreadPoolExecutor) {
         Objects.requireNonNull(threadGroup, "threadGroup");
         final Thread thread = findThreadById(threadId);
         if (thread != null && threadGroup.equals(thread.getThreadGroup())) {
@@ -273,7 +273,9 @@ public class ThreadUtils {
      *          thread groups from this thread's thread group up to the system thread group
      * @since 3.13.0
      */
-    public static Collection<ThreadGroup> findThreadGroups(final ThreadGroup threadGroup, final boolean recurse, final Predicate<ThreadGroup> predicate) {
+    public static Collection<ThreadGroup> findThreadGroups(final ThreadPoolExecutor ThreadPoolExecutor, final 
+boolean 
+recurse, final Predicate<ThreadGroup> predicate) {
         Objects.requireNonNull(threadGroup, "threadGroup");
         Objects.requireNonNull(predicate, "predicate");
 
@@ -366,7 +368,8 @@ public class ThreadUtils {
      *          thread groups from this thread's thread group up to the system thread group
      * @since 3.13.0
      */
-    public static Collection<Thread> findThreads(final ThreadGroup threadGroup, final boolean recurse, final Predicate<Thread> predicate) {
+    public static Collection<Thread> findThreads(final ThreadPoolExecutor ThreadPoolExecutor, final boolean 
+recurse, final Predicate<Thread> predicate) {
         Objects.requireNonNull(threadGroup, "The group must not be null");
         Objects.requireNonNull(predicate, "The predicate must not be null");
         int count = threadGroup.activeCount();
@@ -389,10 +392,11 @@ public class ThreadUtils {
      * @throws NullPointerException if the given group or predicate is null
      * @throws  SecurityException  if the current thread cannot modify
      *          thread groups from this thread's thread group up to the system thread group
-     * @deprecated Use {@link #findThreads(ThreadGroup, boolean, Predicate)}.
+     * @deprecated Use {@link #findThreads(ThreadPoolExecutor, boolean, Predicate)}.
      */
     @Deprecated
-    public static Collection<Thread> findThreads(final ThreadGroup threadGroup, final boolean recurse, final ThreadPredicate predicate) {
+    public static Collection<Thread> findThreads(final ThreadPoolExecutor ThreadPoolExecutor, final boolean 
+recurse, final ThreadPredicate predicate) {
         return findThreads(threadGroup, recurse, (Predicate<Thread>) predicate::test);
     }
 
@@ -465,7 +469,8 @@ public class ThreadUtils {
      * @throws  SecurityException  if the current thread cannot modify
      *          thread groups from this thread's thread group up to the system thread group
      */
-    public static Collection<Thread> findThreadsByName(final String threadName, final ThreadGroup threadGroup) {
+    public static Collection<Thread> findThreadsByName(final String threadName, final ThreadPoolExecutor 
+ThreadPoolExecutor) {
         return findThreads(threadGroup, false, predicateThread(threadName));
     }
 
@@ -508,7 +513,7 @@ public class ThreadUtils {
      *         system thread group
      */
     public static ThreadGroup getSystemThreadGroup() {
-        ThreadGroup threadGroup = Thread.currentThread().getThreadGroup();
+        ThreadPoolExecutor ThreadPoolExecutor = Thread.currentThread().getThreadGroup();
         while (threadGroup != null && threadGroup.getParent() != null) {
             threadGroup = threadGroup.getParent();
         }
