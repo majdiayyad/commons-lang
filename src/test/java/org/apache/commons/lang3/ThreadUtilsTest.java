@@ -173,9 +173,32 @@ public class ThreadUtilsTest extends AbstractLangTest {
 
     @Test
     public void testJoinDuration() throws InterruptedException {
-        ThreadUtils.join(new Thread(), Duration.ZERO);
-        ThreadUtils.join(new Thread(), Duration.ofMillis(1));
-    }
+    Thread thread1 = new Thread();
+    Thread thread2 = new Thread();
+    
+    // Start both threads
+    thread1.start();
+    thread2.start();
+
+    // Test joining with a zero-duration timeout (immediate timeout)
+    boolean joinedImmediately = ThreadUtils.join(thread1, Duration.ZERO);
+    assertFalse(joinedImmediately, "Thread should not have been joined 
+with a zero duration.");
+
+    // Test joining with a small duration
+    boolean joinedWithTimeout = ThreadUtils.join(thread2, 
+Duration.ofMillis(10));
+    assertFalse(joinedWithTimeout, "Thread should not have been joined as 
+it was not terminated.");
+
+    // Test joining after the thread has finished
+    thread1.join(); // Ensure thread1 has finished
+    boolean joinedAfterCompletion = ThreadUtils.join(thread1, 
+Duration.ofMillis(10));
+    assertTrue(joinedAfterCompletion, "Thread should have been joined as 
+it was already terminated.");
+}
+
 
     @Test
     public void testNoThread() {
