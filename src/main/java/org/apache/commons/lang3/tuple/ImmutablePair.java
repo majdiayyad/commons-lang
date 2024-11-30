@@ -165,10 +165,10 @@ public class ImmutablePair<L, R> extends Pair<L, R> {
     }
 
     /** Left object */
-    public final L left;
+    public final L leftvalue;
 
     /** Right object */
-    public final R right;
+    public final R rightvalue;
 
     /**
      * Create a new pair instance.

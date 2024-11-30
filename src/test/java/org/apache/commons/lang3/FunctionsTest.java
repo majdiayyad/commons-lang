@@ -696,11 +696,24 @@ public class FunctionsTest extends AbstractLangTest {
     }
 
     @Test
+    import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+public class FunctionsTest {
+
+    @Test
     public void testConstructor() {
-        // We allow this, which must have been an omission to make the ctor private.
+        // We allow this, which must have been an omission to make the 
+ctor private.
         // We could make the ctor private in 4.0.
-        new Functions();
+        Functions functions = new Functions();
+        
+        // Add an assertion to check that the object is not null
+        assertNotNull(functions, "The Functions instance should not be 
+null.");
     }
+}
+
 
     @Test
     public void testFunction() {

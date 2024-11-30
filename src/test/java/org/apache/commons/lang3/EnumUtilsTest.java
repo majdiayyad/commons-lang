@@ -583,11 +583,23 @@ public class EnumUtilsTest extends AbstractLangTest {
         assertThrows(NullPointerException.class, () -> EnumUtils.processBitVectors(empty, 0L));
     }
 
+    import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+public class EnumUtilsTest {
+
     @Test
     public void testConstructable() {
-        // enforce public constructor
-        new EnumUtils();
+        // Enforce public constructor
+        EnumUtils enumUtils = new EnumUtils();
+        
+        // Add an assertion to check that the object is not null
+        assertNotNull(enumUtils, "The EnumUtils instance should not be 
+null.");
     }
+}
+
 
 }
 

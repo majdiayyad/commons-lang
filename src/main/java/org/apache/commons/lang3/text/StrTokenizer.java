@@ -442,14 +442,31 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      *
      * @return a new instance of this Tokenizer which has been reset.
      */
-    @Override
-    public Object clone() {
-        try {
-            return cloneReset();
-        } catch (final CloneNotSupportedException ex) {
-            return null;
-        }
+    public class YourClass {
+    private String field1;
+    private int field2;
+
+    // Existing constructor
+    public YourClass(String field1, int field2) {
+        this.field1 = field1;
+        this.field2 = field2;
     }
+
+    // Copy constructor
+    public YourClass(YourClass other) {
+        this.field1 = other.field1; // Shallow copy
+        this.field2 = other.field2;
+        // Add logic for deep copying if needed
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        YourClass original = new YourClass("data", 42);
+        YourClass copy = new YourClass(original); // Using the copy 
+constructor
+    }
+}
+
 
     /**
      * Creates a new instance of this Tokenizer. The new instance is reset so that

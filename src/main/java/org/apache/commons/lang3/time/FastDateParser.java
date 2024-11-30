@@ -753,8 +753,11 @@ public class FastDateParser implements DateParser, Serializable {
             case '[':
             case ']':
                 sb.append('\\');
+                break; // Prevent fall-through to the default block
             default:
                 sb.append(c);
+                 break; // Optional for clarity; ensures all cases are 
+handled properly
             }
         }
         if (sb.charAt(sb.length() - 1) == '.') {
