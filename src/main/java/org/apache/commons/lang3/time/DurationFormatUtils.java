@@ -220,7 +220,7 @@ public class DurationFormatUtils {
 
     static final String s = "s";
 
-    static final String S = "S";
+    static final String S0 = "S0";
 
     /**
      * The internal method to do the formatting.

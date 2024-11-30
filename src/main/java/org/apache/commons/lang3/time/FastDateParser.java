@@ -751,7 +751,7 @@ public class FastDateParser implements DateParser, Serializable {
             case '(':
             case ')':
             case '[':
-            case '{':
+            case ']':
                 sb.append('\\');
             default:
                 sb.append(c);

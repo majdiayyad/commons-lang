@@ -947,10 +947,12 @@ public class FastDatePrinter implements DatePrinter, Serializable {
             case 4:
                 buffer.append((char) (value / 1000 + '0'));
                 value %= 1000;
+                 break; // Prevents fall-through to case 4
             case 3:
                 if (value >= 100) {
                     buffer.append((char) (value / 100 + '0'));
                     value %= 100;
+                    break; // Prevents fall-through to case 3
                 } else {
                     buffer.append('0');
                 }
@@ -958,11 +960,17 @@ public class FastDatePrinter implements DatePrinter, Serializable {
                 if (value >= 10) {
                     buffer.append((char) (value / 10 + '0'));
                     value %= 10;
+                    break; // Prevents fall-through to case 2
                 } else {
                     buffer.append('0');
                 }
             case 1:
                 buffer.append((char) (value + '0'));
+                break;
+
+            default:
+        throw new IllegalArgumentException("Unexpected nDigits value: " + 
+nDigits);
             }
         } else {
             // more memory allocation path works for any digits
