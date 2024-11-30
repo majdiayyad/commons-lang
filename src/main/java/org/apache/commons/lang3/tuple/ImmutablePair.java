@@ -160,12 +160,15 @@ public class ImmutablePair<L, R> extends Pair<L, R> {
      * @return a pair formed from the two parameters, not null
      * @since 3.11
      */
+    public class ImmutablePair<L, R> {
+
     public static <L, R> Pair<L, R> right(final R right) {
         return of(null, right);
     }
 
     /** Left object */
-    public final L leftvalue;
+    public transient final L leftvalue; // Marked as transient to exclude 
+from serialization
 
     /** Right object */
     public final R rightvalue;
@@ -196,6 +199,7 @@ public class ImmutablePair<L, R> extends Pair<L, R> {
     public R getRight() {
         return rightvalue;
     }
+}
 
     /**
      * Throws {@link UnsupportedOperationException}.
