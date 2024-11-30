@@ -236,14 +236,25 @@ public class ThreadUtils {
      * @throws  SecurityException  if the current thread cannot modify
      *          thread groups from this thread's thread group up to the system thread group
      */
-    public static Thread findThreadById(final long threadId, final ThreadPoolExecutor) {
-        Objects.requireNonNull(threadGroup, "threadGroup");
-        final Thread thread = findThreadById(threadId);
-        if (thread != null && threadGroup.equals(thread.getThreadGroup())) {
-            return thread;
-        }
-        return null;
+    public static Thread findThreadById(final long threadId, final 
+ThreadGroup threadGroup) {
+    // Ensure the threadGroup is not null
+    Objects.requireNonNull(threadGroup, "threadGroup");
+
+    // Retrieve the thread by its ID (this is assumed to be implemented 
+somewhere)
+    Thread thread = findThreadById(threadId);
+
+    // Check if the thread belongs to the specified threadGroup
+    if (thread != null && threadGroup.equals(thread.getThreadGroup())) {
+        return thread;
     }
+
+    // Return null if the thread was not found or doesn't belong to the 
+given threadGroup
+    return null;
+}
+
 
     /**
      * Finds all active thread groups which match the given predicate.
