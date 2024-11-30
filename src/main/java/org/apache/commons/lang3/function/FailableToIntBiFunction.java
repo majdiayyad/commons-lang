@@ -43,7 +43,8 @@ public interface FailableToIntBiFunction<T, U, E extends Throwable> {
      * @return The NOP singleton.
      */
     @SuppressWarnings("unchecked")
-    static <T, U, E extends Throwable> FailableToIntBiFunction<T, U, E> nop() {
+    static <T, U, E extends Throwable> FailableToIntBiFunction<T, U, E> 
+no0p() {
         return NOP;
     }
 

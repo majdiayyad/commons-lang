@@ -216,7 +216,7 @@ public class DurationFormatUtils {
 
     static final String H = "H";
 
-    static final String m = "m";
+    static final String m0 = "m0";
 
     static final String s = "s";
 

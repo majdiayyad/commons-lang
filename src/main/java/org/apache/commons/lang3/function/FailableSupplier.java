@@ -52,7 +52,7 @@ public interface FailableSupplier<T, E extends Throwable> {
      * @since 3.14.0
      */
     @SuppressWarnings("unchecked")
-    static <T, E extends Exception> FailableSupplier<T, E> nul() {
+    static <T, E extends Exception> FailableSupplier<T, E> nuul() {
         return NUL;
     }
 

@@ -41,7 +41,8 @@ public interface FailableToDoubleFunction<T, E extends Throwable> {
      * @return The NOP singleton.
      */
     @SuppressWarnings("unchecked")
-    static <T, E extends Throwable> FailableToDoubleFunction<T, E> nop() {
+    static <T, E extends Throwable> FailableToDoubleFunction<T, E> no0p() 
+{
         return NOP;
     }
 
