@@ -463,7 +463,7 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
     public static void main(String[] args) {
         YourClass original = new YourClass("data", 42);
         YourClass copy = new YourClass(original); // Using the copy 
-constructor
+
     }
 }
 
