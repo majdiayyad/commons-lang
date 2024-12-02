@@ -1,24 +1,19 @@
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements. See the NOTICE file distributed 
-with
-# this work for additional information regarding copyright ownership.
-# The ASF licenses this file to you under the Apache License, Version 
-2.0
-# (the "License"); you may not use this file except in compliance 
-with
+# with this work for additional information regarding copyright ownership.
+# The ASF licenses this file to you under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
 # the License. You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
-implied.
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: 
-Java CI
+name: Java CI
 
 on:
   push:
@@ -31,45 +26,46 @@ permissions:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.experimental }}
+    runs-on: windows-latest
+    continue-on-error: false
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-13]
         java: [8, 11, 17, 21]
         experimental: [false]
         include:
           - java: 23
             experimental: true
-            os: ubuntu-latest
           - java: 24-ea
             experimental: true
-            os: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4.2.2
         with:
           persist-credentials: false
+
       - uses: actions/cache@v4.1.2
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+
       - name: Set up JDK ${{ matrix.java }}
         uses: actions/setup-java@v4.5.0
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.java }}
+
       - name: Build with Maven
         run: mvn --errors --show-version --batch-mode --no-transfer-progress -Ddoclint=all
 
       - name: SonarCloud Scan
         env:
-          SONAR_TOKEN: ${{ secrets.SONARCLOUD_AUTH_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_MAJDI }}
         run: |
           mvn clean verify sonar:sonar \
-          -Dsonar.projectKey=TAOUBI-123_commons-lang \
-          -Dsonar.organization=lang \
+          -Dsonar.projectKey=majdiayyad_commons-lang \
+          -Dsonar.organization=majdiayyad \
           -Dsonar.host.url=https://sonarcloud.io
+
 
