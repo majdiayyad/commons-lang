@@ -61,7 +61,7 @@ jobs:
 
       - name: SonarCloud Scan
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_MAJDI }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKENCL}}
         run: |
           mvn clean verify sonar:sonar \
           -Dsonar.projectKey=majdiayyad_commons-lang \
