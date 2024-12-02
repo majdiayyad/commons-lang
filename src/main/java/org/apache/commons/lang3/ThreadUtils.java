@@ -256,14 +256,12 @@ for (Thread t : threads) {
 }
 
 
-
     // Check if the thread belongs to the specified threadGroup
     if (thread != null && threadGroup.equals(thread.getThreadGroup())) {
         return thread;
     }
 
-    // Return null if the thread was not found or doesn't belong to the 
-given threadGroup
+    // Return null if the thread was not found or doesn't belong to the given threadGroup
     return null;
 }
 
