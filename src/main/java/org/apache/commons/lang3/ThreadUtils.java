@@ -242,8 +242,19 @@ ThreadGroup threadGroup) {
     Objects.requireNonNull(threadGroup, "threadGroup");
 
     // Retrieve the thread by its ID (this is assumed to be implemented 
-somewhere); 
-   Thread thread = findThreadById(threadId);
+// Get all active threads in the group
+Thread[] threads = new Thread[threadGroup.activeCount()];
+threadGroup.enumerate(threads, true);
+
+// Find the thread with the matching ID
+Thread thread = null;
+for (Thread t : threads) {
+    if (t != null && t.getId() == threadId) {
+        thread = t;
+        break;
+    }
+}
+
 
 
     // Check if the thread belongs to the specified threadGroup
